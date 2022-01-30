@@ -35,6 +35,7 @@
 #include <string>
 #include "driver/i2c.h"
 #include "driver/uart.h"
+#include "rom/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
@@ -540,9 +541,26 @@ class BNO055I2CError : public BNO055BaseException {
 
 class BNO055 {
    public:
-    BNO055(i2c_port_t i2cPort, uint8_t i2cAddr, gpio_num_t rstPin = GPIO_NUM_MAX, gpio_num_t intPin = GPIO_NUM_MAX);
-    BNO055(uart_port_t uartPort, gpio_num_t txPin = GPIO_NUM_17, gpio_num_t rxPin = GPIO_NUM_16, gpio_num_t rstPin = GPIO_NUM_MAX,
-           gpio_num_t intPin = GPIO_NUM_MAX);
+    BNO055(uart_port_t uartPort,
+           gpio_num_t txPin,
+           gpio_num_t rxPin,
+           gpio_num_t rstPin,
+           gpio_num_t intPin = GPIO_NUM_MAX)
+            : _rstPin(rstPin)
+            , _intPin(intPin)
+            , _uartPort(uartPort)
+            , _txPin(txPin)
+            , _rxPin(rxPin) {}
+
+    BNO055(i2c_port_t i2cPort,
+           uint8_t i2cAddr,
+           gpio_num_t rstPin = GPIO_NUM_MAX,
+           gpio_num_t intPin = GPIO_NUM_MAX)
+            : _rstPin(rstPin)
+            , _intPin(intPin)
+            , _i2cPort(i2cPort)
+            , _i2cAddr(i2cAddr) {}
+
     ~BNO055();
     void begin();
     void stop();

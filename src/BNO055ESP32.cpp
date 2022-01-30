@@ -27,30 +27,8 @@
 
 /*!please use the following clang-settings {BasedOnStyle: Google, ColumnLimit: 130, IndentWidth: 4}!*/
 #include "BNO055ESP32.h"
-
 /* used in ESP_LOG macros */
 static const char *BNO055_LOG_TAG = "BNO055";
-
-BNO055::BNO055(uart_port_t uartPort, gpio_num_t txPin, gpio_num_t rxPin, gpio_num_t rstPin, gpio_num_t intPin) {
-    _i2cFlag = false;
-
-    _uartPort = uartPort;
-    _txPin = txPin;
-    _rxPin = rxPin;
-
-    _rstPin = rstPin;
-    _intPin = intPin;
-}
-
-BNO055::BNO055(i2c_port_t i2cPort, uint8_t i2cAddr, gpio_num_t rstPin, gpio_num_t intPin) {
-    _i2cFlag = true;
-
-    _i2cPort = i2cPort;
-    _i2cAddr = i2cAddr;
-
-    _rstPin = rstPin;
-    _intPin = intPin;
-}
 
 BNO055::~BNO055() {
     // Free allocated resources
