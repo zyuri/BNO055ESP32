@@ -13,17 +13,17 @@ currently ***UART is suggested.***
 
 # Getting Started
 ***NOTE: this code is not (yet) Production Ready.***   
-You can use this library as a component for your project: 
+You can use this library as a managed component for your project. 
+Add the following to your main/idf_component.yml:
 ```
-cd <YOUR_PROJECT_ROOT>
-mkdir components/
-cd components/
-git clone https://github.com/ShellAddicted/BNO055ESP32.git
+  bno055:
+    path: .
+    git: https://github.com/zyuri/BNO055ESP32.git
 ```
 Remember to enable ```Compiler Options -> Enable C++ Exceptions``` using ```make menuconfig```
 
 for more details see [examples/](https://github.com/ShellAddicted/BNO055ESP32/tree/master/examples)
-
+also read [IDF component manager](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/tools/idf-component-manager.html)
 ## Wiring
 
 ### UART
